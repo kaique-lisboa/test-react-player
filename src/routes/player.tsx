@@ -81,6 +81,13 @@ const ReactPlayerDebugger = () => {
     loadedSeconds: 0,
   });
 
+  const testBatchPauseAndPlay = useCallback(() => {
+    setIsPlaying(false);
+    setTimeout(() => {
+      setIsPlaying(true);
+    }, 500);
+  }, []);
+
   const urls = [
     "https://www.youtube.com/watch?v=8Pa9x9fZBtY",
     "https://www.youtube.com/watch?v=sjkrrmBnpGE",
@@ -251,10 +258,32 @@ const ReactPlayerDebugger = () => {
         </div>
 
         <div style={{ marginBottom: "10px" }}>
-          <button onClick={() => seekTo(0)}>Seek to Start</button>
-          <button onClick={() => seekTo(30)}>Seek to 30s</button>
-          <button onClick={() => seekTo(60)}>Seek to 60s</button>
           <button
+            className="px-2 py-1 border bg-blue-100"
+            onClick={testBatchPauseAndPlay}
+          >
+            Test Batch Pause and Play
+          </button>
+          <button
+            className="px-2 py-1 border bg-blue-100"
+            onClick={() => seekTo(0)}
+          >
+            Seek to Start
+          </button>
+          <button
+            className="px-2 py-1 border bg-blue-100"
+            onClick={() => seekTo(30)}
+          >
+            Seek to 30s
+          </button>
+          <button
+            className="px-2 py-1 border bg-blue-100"
+            onClick={() => seekTo(60)}
+          >
+            Seek to 60s
+          </button>
+          <button
+            className="px-2 py-1 border bg-blue-100"
             onClick={() => {
               if (playerRef.current) {
                 const duration = playerRef.current.getDuration();
