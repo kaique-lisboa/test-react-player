@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import ReactPlayer from "react-player";
+import { flushSync } from "react-dom";
 
 export const Route = createFileRoute("/player")({
   component: RouteComponent,
@@ -82,10 +83,12 @@ const ReactPlayerDebugger = () => {
   });
 
   const testBatchPauseAndPlay = useCallback(() => {
-    setIsPlaying(false);
-    setTimeout(() => {
+    flushSync(() => {
+      setIsPlaying(false);
+    });
+    flushSync(() => {
       setIsPlaying(true);
-    }, 500);
+    });
   }, []);
 
   const urls = [
